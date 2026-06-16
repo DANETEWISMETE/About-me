@@ -1,17 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/mobile-menu.js" defer></script>
     <title>Sobre Daniel Guillamón Rico</title>
 </head>
 
 <body>
     <header>
         <nav>
-            <ul class="nav-links">
+            <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="main-menu">
                 <li><a href="index.html" class="nav-link active">Inicio</a></li>
                 <li><a href="#experiencia_laboral_section" class="nav-link">Experiencia Laboral</a></li>
                 <li><a href="pages/formacion.html" class="nav-link">Formación</a></li>
@@ -30,6 +36,7 @@
                         web. Mi objetivo es seguir aprendiendo y desarrollando mis habilidades para convertirme
                         en un profesional competente.
                     </p>
+                    <a href="pages/contacto.html" class="contacto-button">Pongámonos al día!</a>
                 </div>
                 <figure class="sobreMi-figure">
                     <img src="images/Daniel_Foto.jpg" alt="Foto de Daniel Guillamón Rico">
@@ -73,18 +80,53 @@
         </section>
     </main>
     <footer>
-        <nav class="footer-nav">
-            <ul class="footer-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="#experiencia_laboral_section">Experiencia Laboral</a></li>
-                <li><a href="pages/formacion.html">Formación</a></li>
-                <li><a href="pages/projectos.html">Proyectos</a></li>
-                <li><a href="pages/tecnologias.html">Tecnologías</a></li>
-                <li><a href="pages/contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
+        <div class="footer-content">
+            <section class="footer-section">
+                <h3>Páginas</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="#experiencia_laboral_section">Experiencia Laboral</a></li>
+                    <li><a href="pages/formacion.html">Formación</a></li>
+                    <li><a href="pages/projectos.html">Proyectos</a></li>
+                    <li><a href="pages/tecnologias.html">Tecnologías</a></li>
+                    <li><a href="pages/contacto.html">Contacto</a></li>
+                </ul>
+            </section>
+            <section class="footer-section">
+                <h3>Proyectos</h3>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/ITBDaniel/Flags-Game-master" target="_blank" rel="noopener noreferrer">Flags Game</a></li>
+                    <li><a href="https://gitlab.com/keneth.rapalo/plinga_studios" target="_blank" rel="noopener noreferrer">FNID</a></li>
+                </ul>
+            </section>
+            <section class="footer-section">
+                <h3>Contacto</h3>
+                <ul class="footer-links">
+                    <li>
+                        <a href="mailto:danielguillamonrico@gmail.com" class="footer-icon-link">
+                            <figure><img src="images/icons/email.svg" alt=""></figure>
+                            <span>Email</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/daniel-guillam%C3%B3n-rico-b371372b8/" target="_blank" rel="noopener noreferrer" class="footer-icon-link">
+                            <figure><img src="images/icons/linkedin.svg" alt=""></figure>
+                            <span>LinkedIn</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ITBDaniel" target="_blank" rel="noopener noreferrer" class="footer-icon-link">
+                            <figure><img src="images/icons/github.svg" alt=""></figure>
+                            <span>GitHub</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
         <p class="copyright">Copyright &copy; 2026 Daniel Guillamón Rico. Todos los derechos reservados.</p>
     </footer>
 </body>
 
 </html>
+
+

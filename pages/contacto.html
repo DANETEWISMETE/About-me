@@ -1,17 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/mobile-menu.js" defer></script>
     <title>Contacto</title>
 </head>
 
 <body>
     <header>
         <nav>
-            <ul class="nav-links">
+            <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="main-menu">
                 <li><a href="../index.html" class="nav-link">Inicio</a></li>
                 <li><a href="../index.html#experiencia_laboral_section" class="nav-link">Experiencia Laboral</a></li>
                 <li><a href="formacion.html" class="nav-link">Formación</a></li>
@@ -26,27 +32,81 @@
             <article>
                 <h2>Contacto</h2>
                 <p>Si deseas ponerte en contacto conmigo, puedes hacerlo a través de los siguientes medios:</p>
-                <ul>
-                    <li>Email: <a href="mailto:danielguillamonrico@gmail.com">danielguillamonrico@gmail.com</a> o <a href="mailto:daniel.guillamon.7e7@itb.cat">daniel.guillamon.7e7@itb.cat</a></li>
-                    <li>LinkedIn: <a href="https://www.linkedin.com/in/daniel-guillam%C3%B3n-rico-b371372b8/" target="_blank">Daniel Guillamón Rico</a></li>
-                    <li>GitHub: <a href="https://github.com/ITBDaniel" target="_blank">ITBDaniel</a></li>
+                <ul class="contacto-list">
+                    <li>
+                        <figure><img src="../images/icons/email.svg" alt="Icono de email"></figure>
+                        <div>
+                            <span>Email</span>
+                            <a href="mailto:danielguillamonrico@gmail.com">danielguillamonrico@gmail.com</a>
+                            <a href="mailto:daniel.guillamon.7e7@itb.cat">daniel.guillamon.7e7@itb.cat</a>
+                        </div>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/linkedin.svg" alt="Icono de LinkedIn"></figure>
+                        <div>
+                            <span>LinkedIn</span>
+                            <a href="https://www.linkedin.com/in/daniel-guillam%C3%B3n-rico-b371372b8/" target="_blank" rel="noopener noreferrer">Daniel Guillamón Rico</a>
+                        </div>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/github.svg" alt="Icono de GitHub"></figure>
+                        <div>
+                            <span>GitHub</span>
+                            <a href="https://github.com/ITBDaniel" target="_blank" rel="noopener noreferrer">ITBDaniel</a>
+                        </div>
+                    </li>
                 </ul>
             </article>
         </section>
     </main>
     <footer>
-        <nav class="footer-nav">
-            <ul class="footer-links">
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="../index.html#experiencia_laboral_section">Experiencia Laboral</a></li>
-                <li><a href="formacion.html">Formación</a></li>
-                <li><a href="projectos.html">Proyectos</a></li>
-                <li><a href="tecnologias.html">Tecnologías</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
+        <div class="footer-content">
+            <section class="footer-section">
+                <h3>Páginas</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="../index.html#experiencia_laboral_section">Experiencia Laboral</a></li>
+                    <li><a href="formacion.html">Formación</a></li>
+                    <li><a href="projectos.html">Proyectos</a></li>
+                    <li><a href="tecnologias.html">Tecnologías</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </section>
+            <section class="footer-section">
+                <h3>Proyectos</h3>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/ITBDaniel/Flags-Game-master" target="_blank" rel="noopener noreferrer">Flags Game</a></li>
+                    <li><a href="https://gitlab.com/keneth.rapalo/plinga_studios" target="_blank" rel="noopener noreferrer">FNID</a></li>
+                </ul>
+            </section>
+            <section class="footer-section">
+                <h3>Contacto</h3>
+                <ul class="footer-links">
+                    <li>
+                        <a href="mailto:danielguillamonrico@gmail.com" class="footer-icon-link">
+                            <figure><img src="../images/icons/email.svg" alt=""></figure>
+                            <span>Email</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/daniel-guillam%C3%B3n-rico-b371372b8/" target="_blank" rel="noopener noreferrer" class="footer-icon-link">
+                            <figure><img src="../images/icons/linkedin.svg" alt=""></figure>
+                            <span>LinkedIn</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ITBDaniel" target="_blank" rel="noopener noreferrer" class="footer-icon-link">
+                            <figure><img src="../images/icons/github.svg" alt=""></figure>
+                            <span>GitHub</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
         <p class="copyright">Copyright &copy; 2026 Daniel Guillamón Rico. Todos los derechos reservados.</p>
     </footer>
 </body>
 
 </html>
+
+

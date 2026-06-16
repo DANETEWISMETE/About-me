@@ -1,17 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/mobile-menu.js" defer></script>
     <title>Tecnologías</title>
 </head>
 
 <body>
     <header>
         <nav>
-            <ul class="nav-links">
+            <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="main-menu">
                 <li><a href="../index.html" class="nav-link">Inicio</a></li>
                 <li><a href="../index.html#experiencia_laboral_section" class="nav-link">Experiencia Laboral</a></li>
                 <li><a href="formacion.html" class="nav-link">Formación</a></li>
@@ -26,30 +32,107 @@
             <article>
                 <h2>Tecnologías</h2>
                 <p>Durante mi formación y experiencia laboral, he adquirido conocimientos en diversas tecnologías web y de desarrollo de software. Algunas de las tecnologías que manejo incluyen:</p>
-                <ul>
-                    <li>HTML, CSS, JavaScript</li>
-                    <li>Lenguajes de programación como Kotlin y PHP</li>
-                    <li>Bases de datos PostgreSQL y NoSQL</li>
-                    <li>Control de versiones con Git</li>
-                    <li>Entornos de desarrollo como Visual Studio Code, IntelliJ IDEA y DataGrip</li>
-                    <li>Administración de sistemas operativos con fundamentos de AWS</li>
+                <ul class="tecnologias-list">
+                    <li>
+                        <figure><img src="../images/icons/html.svg" alt="Icono de HTML"></figure>
+                        <span>HTML</span>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/css.svg" alt="Icono de CSS"></figure>
+                        <span>CSS</span>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/javascript.svg" alt="Icono de JavaScript"></figure>
+                        <span>JavaScript</span>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/kotlin.svg" alt="Icono de Kotlin"></figure>
+                        <span>Kotlin</span>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/php.svg" alt="Icono de PHP"></figure>
+                        <span>PHP</span>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/postgresql.svg" alt="Icono de PostgreSQL"></figure>
+                        <span>PostgreSQL</span>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/nosql.svg" alt="Icono de NoSQL"></figure>
+                        <span>NoSQL</span>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/git.svg" alt="Icono de Git"></figure>
+                        <span>Git</span>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/vscode.svg" alt="Icono de Visual Studio Code"></figure>
+                        <span>Visual Studio Code</span>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/intellij.svg" alt="Icono de IntelliJ IDEA"></figure>
+                        <span>IntelliJ IDEA</span>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/datagrip.svg" alt="Icono de DataGrip"></figure>
+                        <span>DataGrip</span>
+                    </li>
+                    <li>
+                        <figure><img src="../images/icons/aws.svg" alt="Icono de AWS"></figure>
+                        <span>AWS</span>
+                    </li>
                 </ul>
             </article>
         </section>
     </main>
     <footer>
-        <nav class="footer-nav">
-            <ul class="footer-links">
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="../index.html#experiencia_laboral_section">Experiencia Laboral</a></li>
-                <li><a href="formacion.html">Formación</a></li>
-                <li><a href="projectos.html">Proyectos</a></li>
-                <li><a href="tecnologias.html">Tecnologías</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
+        <div class="footer-content">
+            <section class="footer-section">
+                <h3>Páginas</h3>
+                <ul class="footer-links">
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="../index.html#experiencia_laboral_section">Experiencia Laboral</a></li>
+                    <li><a href="formacion.html">Formación</a></li>
+                    <li><a href="projectos.html">Proyectos</a></li>
+                    <li><a href="tecnologias.html">Tecnologías</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </section>
+            <section class="footer-section">
+                <h3>Proyectos</h3>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/ITBDaniel/Flags-Game-master" target="_blank" rel="noopener noreferrer">Flags Game</a></li>
+                    <li><a href="https://gitlab.com/keneth.rapalo/plinga_studios" target="_blank" rel="noopener noreferrer">FNID</a></li>
+                </ul>
+            </section>
+            <section class="footer-section">
+                <h3>Contacto</h3>
+                <ul class="footer-links">
+                    <li>
+                        <a href="mailto:danielguillamonrico@gmail.com" class="footer-icon-link">
+                            <figure><img src="../images/icons/email.svg" alt=""></figure>
+                            <span>Email</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/daniel-guillam%C3%B3n-rico-b371372b8/" target="_blank" rel="noopener noreferrer" class="footer-icon-link">
+                            <figure><img src="../images/icons/linkedin.svg" alt=""></figure>
+                            <span>LinkedIn</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ITBDaniel" target="_blank" rel="noopener noreferrer" class="footer-icon-link">
+                            <figure><img src="../images/icons/github.svg" alt=""></figure>
+                            <span>GitHub</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
         <p class="copyright">Copyright &copy; 2026 Daniel Guillamón Rico. Todos los derechos reservados.</p>
     </footer>
 </body>
 
 </html>
+
+
