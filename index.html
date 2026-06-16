@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -11,62 +11,79 @@
 <body>
     <header>
         <nav>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="pages/sobreMi.html">Sobre mi</a></li>
-            <li><a href="pages/formacion.html">Formacion</a></li>
-            <li><a href="pages/projectos.html">Projectos</a></li>
-            <li><a href="pages/tecnologias.html">Tecnologias</a></li>
-            <li><a href="pages/contacto.html">Contacto</a></li>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active">Inicio</a></li>
+                <li><a href="#experiencia_laboral_section" class="nav-link">Experiencia Laboral</a></li>
+                <li><a href="pages/formacion.html" class="nav-link">Formación</a></li>
+                <li><a href="pages/projectos.html" class="nav-link">Proyectos</a></li>
+                <li><a href="pages/tecnologias.html" class="nav-link">Tecnologías</a></li>
+                <li><a href="pages/contacto.html" class="nav-link">Contacto</a></li>
+            </ul>
         </nav>
     </header>
     <main>
         <section class="sobreMi_section">
-            <article>
-                <figure>
+            <article class="sobreMi-content">
+                <div>
+                    <h1>Hola, soy Daniel, estudiante de DAWe y practicante en WAMAI</h1>
+                    <p>Me defino como una persona resolutiva y responsable interesada en la informática y en el entorno
+                        web. Mi objetivo es seguir aprendiendo y desarrollando mis habilidades para convertirme
+                        en un profesional competente.
+                    </p>
+                </div>
+                <figure class="sobreMi-figure">
                     <img src="images/Daniel_Foto.jpg" alt="Foto de Daniel Guillamón Rico">
                 </figure>
-                <h1>Hola, soy Daniel estudiante de DAWe y practicante en WAMAI</h1>
-                <p>Me defino como una persona resolutiva y responsable interesada en la informática y en el entorno web.
-                    Mi objetivo es seguir aprendiendo y desarrollando mis habilidades, con el fin de convertirme en un
-                    profesional competente.
-                </p>
             </article>
         </section>
-        <section class="experiencia_laboral_section">
-            <article>
-                <h2>Experiencia Laboral</h2>
-                <h3>WAMAI</h3>
-                <p>Actualmente estoy realizando mis prácticas en WAMAI, donde estoy adquiriendo experiencia en el
-                    desarrollo de aplicaciones web y en el trabajo en equipo.</p>
-            </article>
-            <article>
-                <h2>Prácticas Formativas grado medio SMX</h2>
-                <h3>App informatica</h3>
-                <p>Montage i reparación de equipos informáticos, instalacion de sistemas operativos, soporte tecnico directo al cliente.</p>
-            </article>
-            <article>
-                <h3>Solidança</h3>
-                <p>Mantenimiento preventivo de equipos informáticos, gestion de redes locales i recondicionamiento de equipos.</p>
-            </article>
-        </section>
-        <section class="formacion_section" id="formacion_section">
-            <article>
-                <h2>Formación</h2>
-                <h3>Instituto Tecnologico de Barcelona</h3>
-                <p>Cursando el grado en Desarrollo de Aplicaciones Web (DAWe) con orientación en tecnologías web.</p>
-            </article>
+        <section class="experiencia_laboral_section" id="experiencia_laboral_section">
+            <h2>Experiencia Laboral</h2>
+            <div class="experiencia-container">
+                <article class="experiencia-item">
+                    <figure class="experiencia-figure">
+                        <img src="images/wamai.png" alt="Foto de WAMAI">
+                    </figure>
+                    <div class="experiencia-text">
+                        <h3>WAMAI</h3>
+                        <p>Actualmente estoy realizando mis prácticas en WAMAI, donde estoy adquiriendo experiencia en el
+                            desarrollo de aplicaciones web y en el trabajo en equipo.</p>
+                    </div>
+                </article>
+                <article class="experiencia-item">
+                    <figure class="experiencia-figure">
+                        <img src="images/AppInformatica.jpg" alt="Foto de App informática">
+                    </figure>
+                    <div class="experiencia-text">
+                        <h3>App Informática</h3>
+                        <p>Montaje y reparación de equipos informáticos, instalación de sistemas operativos y soporte
+                            técnico directo al cliente.</p>
+                    </div>
+                </article>
+                <article class="experiencia-item">
+                    <figure class="experiencia-figure">
+                        <img src="images/solidança.png" alt="Foto de Solidança">
+                    </figure>
+                    <div class="experiencia-text">
+                        <h3>Solidança</h3>
+                        <p>Mantenimiento preventivo de equipos informáticos, gestión de redes locales y recondicionamiento
+                            de equipos.</p>
+                    </div>
+                </article>
+            </div>
         </section>
     </main>
     <footer>
-        <section class="footer_links"></section>
-        <nav>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="pages/formacion.html">Formacion</a></li>
-            <li><a href="pages/projectos.html">Projectos</a></li>
-            <li><a href="pages/tecnologias.html">Tecnologias</a></li>
-            <li><a href="pages/contacto.html">Tecnologias</a></li>
+        <nav class="footer-nav">
+            <ul class="footer-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#experiencia_laboral_section">Experiencia Laboral</a></li>
+                <li><a href="pages/formacion.html">Formación</a></li>
+                <li><a href="pages/projectos.html">Proyectos</a></li>
+                <li><a href="pages/tecnologias.html">Tecnologías</a></li>
+                <li><a href="pages/contacto.html">Contacto</a></li>
+            </ul>
         </nav>
-        </section>
+        <p class="copyright">Copyright &copy; 2026 Daniel Guillamón Rico. Todos los derechos reservados.</p>
     </footer>
 </body>
 

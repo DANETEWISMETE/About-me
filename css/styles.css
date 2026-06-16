@@ -1,0 +1,497 @@
+/* Reset and General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #f4f4f4;
+    --surface: #ffffff;
+    --text: #333333;
+    --muted: #666666;
+    --primary: #007bff;
+    --primary-contrast: #00d4ff;
+    --primary-dark: #0056b3;
+    --nav-bg: #333333;
+    --nav-text: #ffffff;
+    --nav-hover: #555555;
+    --card-bg: #f9f9f9;
+    --muted-bg: #e0e0e0;
+    --copyright: #bbbbbb;
+    --divider: #444444;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--bg);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header and Navigation */
+header {
+    background-color: var(--nav-bg);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header nav {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-link {
+    display: block;
+    color: var(--nav-text);
+    padding: 1rem 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    background-color: var(--nav-hover);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.nav-link.active {
+    background-color: var(--primary);
+    font-weight: bold;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-contrast);
+}
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    flex: 1 0 auto;
+}
+
+/* SobreMi Section */
+.sobreMi_section {
+    background-color: var(--surface);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sobreMi-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.sobreMi-content > div {
+    flex: 1;
+    order: 1;
+}
+
+.sobreMi-content h1 {
+    margin-bottom: 1rem;
+    color: var(--primary);
+    font-size: 2rem;
+}
+
+.sobreMi-content p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+.sobreMi-figure {
+    flex: 1;
+    order: 2;
+    margin: 0;
+    text-align: center;
+}
+
+.sobreMi-figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Experiencia Laboral Section */
+.experiencia_laboral_section {
+    background-color: var(--surface);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.experiencia_laboral_section h2 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.experiencia-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.experiencia-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+}
+
+.experiencia-figure {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.experiencia-figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.experiencia-text {
+    flex: 1;
+}
+
+.experiencia-text h3 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.experiencia-text p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Proyectos Section */
+.projectos_section {
+    background-color: var(--surface);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.projectos_section h2 {
+    color: var(--primary);
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.projectos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.proyecto-card {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.proyecto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.proyecto-card figure {
+    margin: 0;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background-color: var(--muted-bg);
+}
+
+.proyecto-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.proyecto-card a {
+    padding: 0 1.5rem;
+}
+
+.proyecto-card a h3 {
+    color: var(--primary);
+    margin: 1.5rem 0 0.5rem 0;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+}
+
+.proyecto-card a:hover h3 {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.proyecto-card p {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    color: var(--muted);
+    flex-grow: 1;
+}
+
+/* Other Sections */
+.contacto_section,
+.formacion_section,
+.tecnologias_section {
+    background-color: var(--surface);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contacto_section h2,
+.formacion_section h2,
+.tecnologias_section h2 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.contacto_section h3,
+.formacion_section h3,
+.tecnologias_section h3 {
+    color: var(--primary);
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.contacto_section p,
+.formacion_section p,
+.tecnologias_section p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.contacto_section ul,
+.formacion_section ul,
+.tecnologias_section ul {
+    list-style-position: inside;
+    color: var(--muted);
+}
+
+.contacto_section ul li,
+.formacion_section ul li,
+.tecnologias_section ul li {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+}
+
+.contacto_section a,
+.formacion_section a,
+.tecnologias_section a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contacto_section a:hover,
+.formacion_section a:hover,
+.tecnologias_section a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: var(--nav-bg);
+    color: var(--nav-text);
+    padding: 2rem 0 1rem 0;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-links li {
+    margin: 0;
+}
+
+.footer-links a {
+    display: block;
+    color: var(--nav-text);
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer-links a:hover {
+    background-color: var(--nav-hover);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.copyright {
+    color: var(--copyright);
+    font-size: 0.9rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--nav-hover);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    main {
+        padding: 0 1rem;
+    }
+
+    .sobreMi-content {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .sobreMi-text {
+        order: 1;
+    }
+
+    .sobreMi-content {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .sobreMi-content > div {
+        order: 1;
+    }
+
+    .sobreMi-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .experiencia-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .experiencia-figure {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 1rem auto;
+    }
+
+    .projectos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links,
+    .footer-links {
+        gap: 0;
+    }
+
+    .nav-link,
+    .footer-links a {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    header {
+        padding: 0.5rem 0;
+    }
+
+    .sobreMi_section,
+    .experiencia_laboral_section,
+    .projectos_section,
+    .contacto_section,
+    .formacion_section,
+    .tecnologias_section {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links,
+    .footer-links {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .nav-link,
+    .footer-links a {
+        padding: 0.8rem 1rem;
+        border-bottom: 1px solid var(--divider);
+    }
+
+    .sobreMi-text h1 {
+        font-size: 1.2rem;
+    }
+
+    .projectos_section h2,
+    .experiencia_laboral_section h2,
+    .contacto_section h2,
+    .formacion_section h2,
+    .tecnologias_section h2 {
+        font-size: 1.3rem;
+    }
+
+    .proyecto-card figure {
+        height: 150px;
+    }
+}
