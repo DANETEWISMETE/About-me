@@ -369,13 +369,6 @@ main {
     height: 100%;
 }
 
-/* Ensure card content stretches so all cards have same height */
-.projectos-track .proyecto-card > figure,
-.projectos-track .proyecto-card > p,
-.projectos-track .proyecto-card > a {
-    /* keep layout consistent; specific children keep natural sizing */
-}
-
 .proyecto-card {
     background-color: var(--card-bg);
     border-radius: 10px;
