@@ -24,7 +24,7 @@ if (menuToggle && navLinks) {
     });
 
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
+        if (window.innerWidth > 900) {
             closeMenu();
         }
     });
