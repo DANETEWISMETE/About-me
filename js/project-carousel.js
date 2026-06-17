@@ -25,7 +25,11 @@ const showProject = (index) => {
     const pct = -(index * 100);
     track.style.transform = `translateX(${pct}%)`;
 
-    projectCards.forEach((card, i) => card.setAttribute('aria-hidden', String(i !== currentProject)));
+    projectCards.forEach((card, i) => {
+        const isActive = i === currentProject;
+        card.classList.toggle('is-active', isActive);
+        card.setAttribute('aria-hidden', String(!isActive));
+    });
     prevButton.disabled = currentProject === 0;
     nextButton.disabled = currentProject === total - 1;
     counter.textContent = `${currentProject + 1} / ${total}`;
