@@ -1,5 +1,7 @@
 const THEME_COOKIE_NAME = 'theme-preference';
 const COOKIE_DURATION_DAYS = 365;
+const LIGHT_ICON = '\u2600\uFE0F';
+const DARK_ICON = '\uD83C\uDF19';
 
 function setCookie(name, value, days) {
     const date = new Date();
@@ -25,7 +27,7 @@ function getCookie(name) {
 function updateThemeIcon(isDarkMode) {
     const themeIcon = document.querySelector('.theme-icon');
     if (themeIcon) {
-        themeIcon.textContent = isDarkMode ? '\u263e' : '\u2600';
+        themeIcon.textContent = isDarkMode ? DARK_ICON : LIGHT_ICON;
     }
 }
 
@@ -33,8 +35,13 @@ function initializeTheme() {
     const savedTheme = getCookie(THEME_COOKIE_NAME);
     const isDarkMode = savedTheme === 'dark';
 
-    document.documentElement.classList.toggle('dark-mode', isDarkMode);
-    updateThemeIcon(isDarkMode);
+    if (isDarkMode) {
+        document.documentElement.classList.add('dark-mode');
+        updateThemeIcon(true);
+    } else {
+        document.documentElement.classList.remove('dark-mode');
+        updateThemeIcon(false);
+    }
 }
 
 function toggleTheme() {
