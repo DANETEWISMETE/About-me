@@ -1,0 +1,188 @@
+/* Contact form styles */
+.contacto-form-container {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.contacto-form-container form {
+    display: grid;
+    gap: 1rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-field label {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.form-field input,
+.form-field textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.95rem 1rem;
+    border-radius: 14px;
+    border: 1px solid var(--muted-bg);
+    background-color: var(--surface);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-field input {
+    min-height: 48px;
+}
+
+.form-field textarea {
+    min-height: 140px;
+    max-height: 260px;
+    overflow: auto;
+    resize: vertical;
+}
+
+.field-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+}
+
+.field-error {
+    display: none;
+    color: #dc3545;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-top: 0.35rem;
+    min-height: 1.3rem;
+}
+
+.field-error.visible {
+    display: block;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.12);
+}
+
+.form-field textarea::-webkit-resizer {
+    display: none;
+}
+
+.message-counter {
+    align-self: flex-end;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.contact-form-button {
+    width: fit-content;
+    padding: 0.95rem 1.5rem;
+    border: none;
+    border-radius: 999px;
+    background-color: var(--primary);
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.contact-form-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.status-message {
+    opacity: 0;
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem 1.1rem;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: opacity 0.4s ease;
+}
+
+.status-message.visible {
+    display: block;
+    opacity: 1;
+}
+
+.status-message.success {
+    background-color: rgba(40, 167, 69, 0.22);
+    color: #0f3e1f;
+    border: 1px solid rgba(40, 167, 69, 0.45);
+    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.08);
+}
+
+html.dark-mode .status-message.success {
+    background-color: rgba(40, 167, 69, 0.26);
+    color: #e6f9ea;
+    border-color: rgba(40, 167, 69, 0.55);
+}
+
+.status-message.error {
+    background-color: rgba(220, 53, 69, 0.14);
+    color: #721c24;
+    border: 1px solid rgba(220, 53, 69, 0.35);
+}
+
+html.dark-mode .status-message.error {
+    background-color: rgba(220, 53, 69, 0.22);
+    color: #f2c2c9;
+    border-color: rgba(220, 53, 69, 0.45);
+}
+
+.mailto-fallback {
+    margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    background-color: rgba(0,0,0,0.03);
+    border-radius: 10px;
+    border: 1px dashed var(--muted-bg);
+}
+
+.mailto-fallback p {
+    margin: 0 0 0.5rem 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.mailto-link {
+    display: block;
+    word-break: break-all;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.mailto-copy-btn {
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--primary);
+    color: #fff;
+    cursor: pointer;
+}
+
+.mailto-copy-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+@media (max-width: 768px) {
+    .contacto-form-container {
+        padding: 1.2rem;
+    }
+
+    .form-field input,
+    .form-field textarea {
+        padding: 0.85rem 0.95rem;
+    }
+}

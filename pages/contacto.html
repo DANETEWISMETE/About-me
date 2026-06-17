@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/contact-form-styles.css">
+    <script src="../js/theme-toggle.js" defer></script>
+    <script src="../js/contact-form.js" defer></script>
     <script src="../js/mobile-menu.js" defer></script>
     <title>Contacto</title>
 </head>
@@ -25,6 +28,9 @@
                 <li><a href="tecnologias.html" class="nav-link">Tecnologías</a></li>
                 <li><a href="contacto.html" class="nav-link active">Contacto</a></li>
             </ul>
+            <button class="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema claro/oscuro">
+                <span class="theme-icon">☀️</span>
+            </button>
         </nav>
     </header>
     <main>
@@ -32,6 +38,27 @@
             <article>
                 <h2>Contacto</h2>
                 <p>Si deseas ponerte en contacto conmigo, puedes hacerlo a través de los siguientes medios:</p>
+                <div class="contacto-form-container">
+                    <form id="contact-form" novalidate>
+                        <div class="form-field" data-field="subject">
+                            <label for="subject">Asunto</label>
+                            <input type="text" id="subject" name="subject" maxlength="100" placeholder="Escribe el asunto">
+                            <span class="field-error" id="subject-error" aria-live="polite"></span>
+                        </div>
+
+                        <div class="form-field" data-field="message">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" maxlength="500" placeholder="Escribe tu mensaje aquí"></textarea>
+                            <span id="message-counter" class="message-counter">0/500</span>
+                            <span class="field-error" id="message-error" aria-live="polite"></span>
+                        </div>
+
+                        <button type="submit" class="contact-form-button">Enviar mensaje</button>
+                    </form>
+                    <div id="contact-status-message" class="status-message" style="display:none" aria-live="polite"></div>
+                    <div id="mailto-fallback" class="mailto-fallback" aria-live="polite" style="display:none"></div>
+                </div>
+
                 <ul class="contacto-list">
                     <li>
                         <figure><img src="../images/icons/email.svg" alt="Icono de email"></figure>

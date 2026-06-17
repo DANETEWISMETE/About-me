@@ -23,6 +23,22 @@
     --experiencia-card-height: 180px;
 }
 
+html.dark-mode {
+    --bg: #1a1a1a;
+    --surface: #2d2d2d;
+    --text: #e0e0e0;
+    --muted: #a0a0a0;
+    --primary: #00d4ff;
+    --primary-dark: #00a8cc;
+    --nav-bg: #1a1a1a;
+    --nav-text: #e0e0e0;
+    --nav-hover: #3a3a3a;
+    --card-bg: #333333;
+    --muted-bg: #404040;
+    --copyright: #666666;
+    --divider: #404040;
+}
+
 html,
 body {
     height: 100%;
@@ -58,6 +74,64 @@ header nav {
     align-items: center;
     justify-content: center;
     max-width: 100%;
+    gap: 1rem;
+    position: relative;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+    margin-left: 0;
+    padding: 0.5rem;
+    align-self: center;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-link {
+    display: block;
+    color: var(--text);
+    padding: 1rem 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    transform: scale(1.15);
+}
+
+html.dark-mode .theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--primary-contrast);
+    outline-offset: 2px;
+}
+
+.theme-icon {
+    display: block;
+    transition: transform 0.3s ease;
 }
 
 .menu-toggle {
@@ -78,7 +152,7 @@ header nav {
 
 .nav-link {
     display: block;
-    color: #000000;
+    color: var(--text);
     padding: 1rem 1.5rem;
     transition: all 0.3s ease;
     position: relative;
@@ -268,8 +342,7 @@ main {
 }
 
 .projectos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: block;
     gap: 2rem;
 }
 
@@ -278,6 +351,29 @@ main {
     max-width: 720px;
     margin: 0 auto;
     outline: none;
+    overflow: hidden;
+}
+
+.projectos-track {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    align-items: stretch;
+}
+
+.projectos-track .proyecto-card {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Ensure card content stretches so all cards have same height */
+.projectos-track .proyecto-card > figure,
+.projectos-track .proyecto-card > p,
+.projectos-track .proyecto-card > a {
+    /* keep layout consistent; specific children keep natural sizing */
 }
 
 .proyecto-card {
@@ -289,11 +385,6 @@ main {
     display: flex;
     flex-direction: column;
 }
-
-.projectos-carousel-ready .proyecto-card {
-    display: none;
-}
-
 .projectos-carousel-ready .proyecto-card.is-active {
     display: flex;
     animation: proyectoFade 0.35s ease;
@@ -388,6 +479,26 @@ main {
     color: var(--muted);
     font-weight: bold;
     text-align: center;
+}
+
+@keyframes proyectoSlideForward {
+    from {
+        transform: translateX(110%) scale(0.98);
+    }
+
+    to {
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes proyectoSlideBackward {
+    from {
+        transform: translateX(-110%) scale(0.98);
+    }
+
+    to {
+        transform: translateX(0) scale(1);
+    }
 }
 
 @keyframes proyectoFade {
@@ -518,6 +629,15 @@ main {
     overflow-wrap: anywhere;
 }
 
+.contacto_section article {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.contacto-list {
+    margin-top: 1.5rem;
+}
+
 .contacto_section a,
 .formacion_section a,
 .tecnologias_section a {
@@ -536,7 +656,7 @@ main {
 /* Footer */
 footer {
     background-color: var(--bg);
-    color: #000000;
+    color: var(--text);
     padding: 2.5rem 0 1.2rem 0;
     text-align: center;
     flex-shrink: 0;
@@ -584,7 +704,7 @@ footer {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    color: #000000;
+    color: var(--text);
     padding: 0.45rem 0;
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -623,11 +743,22 @@ footer {
 
     header nav {
         justify-content: flex-end;
-        flex-wrap: wrap;
-        padding: 0 1rem;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+        min-width: 0;
+        position: relative;
+        overflow: visible;
+    }
+
+    .menu-toggle,
+    .theme-toggle {
+        flex-shrink: 0;
+        min-width: 44px;
     }
 
     .menu-toggle {
+        order: 2;
         display: inline-flex;
         width: 44px;
         height: 44px;
@@ -639,15 +770,45 @@ footer {
         border-radius: 8px;
         background-color: transparent;
         cursor: pointer;
+        margin-right: 0;
+    }
+
+    .theme-toggle {
+        order: 3;
+        margin-left: 0;
+    }
+
+    /* Mobile dropdown: positioned absolutely so it always unfolds below header */
+    .nav-links {
+        order: 1;
+        display: flex;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        flex-direction: column;
+        gap: 0;
+        margin: 0.25rem 0 0 0;
+        background-color: var(--bg);
+        border-top: 1px solid var(--muted-bg);
+        z-index: 90;
+        transform-origin: top center;
+        transform: scaleY(0);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        overflow: hidden;
+        will-change: transform, opacity;
+        transition: transform 360ms cubic-bezier(.2,.8,.2,1), opacity 320ms ease, visibility 0ms linear 360ms;
     }
 
     .menu-toggle span {
         display: block;
         width: 24px;
         height: 2px;
-        background-color: #000000;
+        background-color: var(--text);
         border-radius: 999px;
-        transition: transform 0.3s ease, opacity 0.3s ease;
+        transition: transform 360ms cubic-bezier(.2,.8,.2,1), opacity 260ms ease;
     }
 
     .menu-toggle.is-open span:nth-child(1) {
@@ -668,7 +829,6 @@ footer {
     }
 
     .nav-links {
-        display: none;
         width: 100%;
         flex-direction: column;
         gap: 0;
@@ -678,7 +838,11 @@ footer {
     }
 
     .nav-links.is-open {
-        display: flex;
+        transform: scaleY(1);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition-delay: 0s;
     }
 
     .nav-link {
