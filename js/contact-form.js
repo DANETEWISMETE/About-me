@@ -20,6 +20,7 @@ function showFieldError(field, message) {
     if (field) {
         field.classList.add('field-invalid');
     }
+
     const errorElement = getFieldErrorElement(field);
     if (errorElement) {
         errorElement.textContent = message;
@@ -31,6 +32,7 @@ function clearFieldError(field) {
     if (field) {
         field.classList.remove('field-invalid');
     }
+
     const errorElement = getFieldErrorElement(field);
     if (errorElement) {
         errorElement.textContent = '';
@@ -40,45 +42,67 @@ function clearFieldError(field) {
 
 function validateSubject(subjectField) {
     const value = subjectField.value;
+
     if (isBlank(value)) {
-        showFieldError(subjectField, 'El asunto no puede estar vacío ni contener solo espacios.');
+        showFieldError(subjectField, 'El asunto no puede estar vac\u00edo ni contener solo espacios.');
         return false;
     }
+
     clearFieldError(subjectField);
+    return true;
+}
+
+function validateEmail(emailField) {
+    const value = emailField.value;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (isBlank(value)) {
+        showFieldError(emailField, 'El email no puede estar vac\u00edo ni contener solo espacios.');
+        return false;
+    }
+
+    if (!emailPattern.test(value.trim())) {
+        showFieldError(emailField, 'Introduce un email v\u00e1lido.');
+        return false;
+    }
+
+    clearFieldError(emailField);
     return true;
 }
 
 function validateMessage(messageField) {
     const value = messageField.value;
+
     if (isBlank(value)) {
-        showFieldError(messageField, 'El mensaje no puede estar vacío ni contener solo espacios.');
+        showFieldError(messageField, 'El mensaje no puede estar vac\u00edo ni contener solo espacios.');
         return false;
     }
+
     if (value.trim().length > MAX_MESSAGE_LENGTH) {
         showFieldError(messageField, `El mensaje no puede exceder ${MAX_MESSAGE_LENGTH} caracteres.`);
         return false;
     }
+
     clearFieldError(messageField);
     return true;
 }
 
-function formatMailtoUrl(subject, message) {
-    const encodedSubject = encodeURIComponent(subject.trim());
-    const encodedBody = encodeURIComponent(message.trim());
-    return `mailto:${CONTACT_EMAIL}?subject=${encodedSubject}&body=${encodedBody}`;
-}
-
 function initializeContactForm() {
     const form = document.querySelector('#contact-form');
+    const emailField = document.querySelector('#sender-email');
     const subjectField = document.querySelector('#subject');
     const messageField = document.querySelector('#message');
     const counter = document.querySelector('#message-counter');
 
-    if (!form || !subjectField || !messageField || !counter) {
+    if (!form || !emailField || !subjectField || !messageField || !counter) {
         return;
     }
 
     setMessageCounter(messageField, counter);
+
+    emailField.addEventListener('input', () => {
+        validateEmail(emailField);
+    });
 
     subjectField.addEventListener('input', () => {
         validateSubject(subjectField);
@@ -92,43 +116,40 @@ function initializeContactForm() {
     form.addEventListener('submit', (event) => {
         event.preventDefault();
 
+        const emailValid = validateEmail(emailField);
         const subjectValid = validateSubject(subjectField);
         const messageValid = validateMessage(messageField);
 
-        if (!subjectValid || !messageValid) {
+        if (!emailValid || !subjectValid || !messageValid) {
             return;
         }
 
+        const email = emailField.value.trim();
         const subject = subjectField.value.trim();
         const message = messageField.value.trim();
 
         const formData = new FormData();
+        formData.append('email', email);
         formData.append('subject', subject);
         formData.append('message', message);
-        formData.append('_subject', `Nuevo mensaje de contacto: ${subject}`);
-        formData.append('_autoresponse', 'Gracias por contactarme. En breve te responderé.');
+        formData.append('_subject', `Nuevo mensaje de contacto: ${subject} (${email})`);
+        formData.append('_autoresponse', 'Gracias por contactarme. En breve te responder\u00e9.');
         formData.append('_template', 'table');
 
-        submitWithFormSubmit(formData).then(result => {
-            if (result && result.success) {
-                showSuccess('Mensaje enviado correctamente. Gracias.');
-                form.reset();
-                setMessageCounter(messageField, counter);
-                const fallback = document.querySelector('#mailto-fallback');
-                if (fallback) {
-                    fallback.style.display = 'none';
+        submitWithFormSubmit(formData)
+            .then((result) => {
+                if (result && result.success) {
+                    showSuccess('Mensaje enviado correctamente. Gracias.');
+                    form.reset();
+                    setMessageCounter(messageField, counter);
+                } else {
+                    showError('No se pudo enviar el formulario. Puedes escribir directamente a los correos de contacto.');
                 }
-            } else {
-                const mailtoUrl = formatMailtoUrl(subject, message);
-                showMailtoFallback(mailtoUrl);
-                showError('No se pudo enviar desde el servicio. Usa el enlace de fallback.');
-            }
-        }).catch(err => {
-            console.warn('submitWithFormSubmit error', err);
-            const mailtoUrl = formatMailtoUrl(subject, message);
-            showMailtoFallback(mailtoUrl);
-            showError('Error en el envío. Usa el enlace de fallback.');
-        });
+            })
+            .catch((err) => {
+                console.warn('submitWithFormSubmit error', err);
+                showError('Error en el env\u00edo. Puedes escribir directamente a los correos de contacto.');
+            });
     });
 }
 
@@ -136,43 +157,6 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializeContactForm);
 } else {
     initializeContactForm();
-}
-
-function showMailtoFallback(mailtoUrl) {
-    try {
-        const container = document.querySelector('#mailto-fallback');
-        if (!container) return;
-        container.style.display = 'block';
-        container.innerHTML = '';
-
-        const info = document.createElement('p');
-        info.textContent = 'Si no se abrió tu cliente de correo, copia este enlace y pégalo en tu cliente o navegador:';
-        container.appendChild(info);
-
-        const link = document.createElement('a');
-        link.href = mailtoUrl;
-        link.textContent = mailtoUrl;
-        link.className = 'mailto-link';
-        container.appendChild(link);
-
-        const copyBtn = document.createElement('button');
-        copyBtn.type = 'button';
-        copyBtn.textContent = 'Copiar enlace';
-        copyBtn.className = 'mailto-copy-btn';
-        copyBtn.addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText(mailtoUrl);
-                copyBtn.textContent = 'Copiado';
-                setTimeout(() => (copyBtn.textContent = 'Copiar enlace'), 2000);
-            } catch (e) {
-                console.warn('Clipboard copy failed', e);
-                alert('No se pudo copiar automáticamente. Selecciona y copia el enlace manualmente.');
-            }
-        });
-        container.appendChild(copyBtn);
-    } catch (e) {
-        console.warn('showMailtoFallback failed', e);
-    }
 }
 
 async function submitWithFormSubmit(formData) {
@@ -208,6 +192,7 @@ function showError(msg) {
 
 function showStatusMessage(msg, type, duration) {
     const messageBox = getStatusMessageBox();
+
     if (messageBox) {
         messageBox.textContent = msg;
         messageBox.className = `status-message visible ${type}`;
@@ -231,6 +216,7 @@ function clearStatusTimeout() {
 function hideStatusMessage() {
     const messageBox = getStatusMessageBox();
     if (!messageBox) return;
+
     messageBox.classList.remove('visible');
     window.setTimeout(() => {
         if (!messageBox.classList.contains('visible')) {
