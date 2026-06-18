@@ -8,6 +8,13 @@ const counter = document.querySelector('.projectos-counter');
 let currentProject = 0;
 let track = null;
 
+function setActiveHeight() {
+    if (!projectGrid || projectCards.length === 0) return;
+
+    const activeCard = projectCards[currentProject];
+    projectGrid.style.height = `${activeCard.offsetHeight}px`;
+}
+
 function buildTrack() {
     if (!projectGrid) return null;
     // create a track and move cards inside it
@@ -33,6 +40,7 @@ const showProject = (index) => {
     prevButton.disabled = currentProject === 0;
     nextButton.disabled = currentProject === total - 1;
     counter.textContent = `${currentProject + 1} / ${total}`;
+    setActiveHeight();
 };
 
 if (projectSection && projectGrid && projectCards.length > 0 && prevButton && nextButton && counter) {
@@ -59,6 +67,17 @@ if (projectSection && projectGrid && projectCards.length > 0 && prevButton && ne
             event.preventDefault();
             showProject(Math.min(currentProject + 1, projectCards.length - 1));
         }
+    });
+
+    window.addEventListener('resize', setActiveHeight);
+
+    projectCards.forEach((card) => {
+        const images = card.querySelectorAll('img');
+
+        images.forEach((image) => {
+            if (image.complete) return;
+            image.addEventListener('load', setActiveHeight, { once: true });
+        });
     });
 
     // ensure correct initial sizing

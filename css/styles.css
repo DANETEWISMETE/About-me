@@ -41,6 +41,7 @@ html.dark-mode {
 html,
 body {
     height: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -183,6 +184,7 @@ html.dark-mode .theme-toggle:hover {
 
 /* Main Content */
 main {
+    width: 100%;
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 2rem;
@@ -342,6 +344,7 @@ main {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .projectos_section h2 {
@@ -354,21 +357,25 @@ main {
 .projectos-grid {
     display: block;
     gap: 2rem;
+    min-width: 0;
 }
 
 .projectos-carousel-ready .projectos-grid {
     display: block;
-    max-width: 720px;
+    width: 100%;
+    max-width: none;
     margin: 0 auto;
     outline: none;
     overflow: hidden;
+    transition: height 0.25s ease;
 }
 
 .projectos-track {
     display: flex;
     width: 100%;
+    min-width: 0;
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    align-items: stretch;
+    align-items: flex-start;
 }
 
 .projectos-track .proyecto-card {
@@ -376,10 +383,11 @@ main {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: auto;
 }
 
 .proyecto-card {
+    min-width: 0;
     background-color: var(--card-bg);
     border-radius: 10px;
     overflow: hidden;
@@ -412,7 +420,7 @@ main {
     object-fit: cover;
 }
 
-.proyecto-card a {
+.proyecto-card > a {
     padding: 0 1.5rem;
 }
 
@@ -429,9 +437,24 @@ main {
 }
 
 .proyecto-card p {
-    padding: 0 1.5rem 1.5rem 1.5rem;
+    padding: 0 1.5rem 1rem 1.5rem;
     color: var(--muted);
-    flex-grow: 1;
+    flex-grow: 0;
+}
+
+.proyecto-card p:last-child {
+    padding-bottom: 1.5rem;
+}
+
+.proyecto-card p a {
+    padding: 0;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.proyecto-card p a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
 }
 
 .projectos-controls {
@@ -894,7 +917,7 @@ footer {
     }
 
     .projectos-grid {
-        grid-template-columns: 1fr;
+        width: 100%;
     }
 
     .footer-content {
