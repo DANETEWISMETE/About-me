@@ -2,6 +2,7 @@ const THEME_COOKIE_NAME = 'theme-preference';
 const COOKIE_DURATION_DAYS = 365;
 const LIGHT_ICON = '\u2600\uFE0F';
 const DARK_ICON = '\uD83C\uDF19';
+const THEME_TRANSITION_MS = 350;
 
 function setCookie(name, value, days) {
     const date = new Date();
@@ -46,9 +47,16 @@ function initializeTheme() {
 
 function toggleTheme() {
     const html = document.documentElement;
+    const themeButton = document.querySelector('.theme-toggle');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduceMotion) {
+        html.classList.add('theme-transition');
+        themeButton?.classList.add('is-switching');
+    }
+
     const isDarkMode = html.classList.toggle('dark-mode');
     const theme = isDarkMode ? 'dark' : 'light';
-    const themeButton = document.querySelector('.theme-toggle');
 
     setCookie(THEME_COOKIE_NAME, theme, COOKIE_DURATION_DAYS);
     updateThemeIcon(isDarkMode);
@@ -56,6 +64,13 @@ function toggleTheme() {
     if (themeButton) {
         const label = isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro';
         themeButton.setAttribute('aria-label', label);
+    }
+
+    if (!reduceMotion) {
+        window.setTimeout(() => {
+            html.classList.remove('theme-transition');
+            themeButton?.classList.remove('is-switching');
+        }, THEME_TRANSITION_MS);
     }
 }
 

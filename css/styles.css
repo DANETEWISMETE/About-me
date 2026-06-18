@@ -44,6 +44,13 @@ body {
     background-color: var(--bg);
 }
 
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+    transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -116,6 +123,10 @@ html.dark-mode .theme-toggle:hover {
 .theme-icon {
     display: block;
     transition: transform 0.3s ease;
+}
+
+.theme-toggle.is-switching .theme-icon {
+    transform: rotate(180deg) scale(1.15);
 }
 
 .menu-toggle {
