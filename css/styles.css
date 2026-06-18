@@ -13,13 +13,8 @@
     --primary: #007bff;
     --primary-contrast: #00d4ff;
     --primary-dark: #0056b3;
-    --nav-bg: #333333;
-    --nav-text: #ffffff;
-    --nav-hover: #555555;
     --card-bg: #f9f9f9;
     --muted-bg: #e0e0e0;
-    --copyright: #bbbbbb;
-    --divider: #444444;
 }
 
 html.dark-mode {
@@ -29,13 +24,8 @@ html.dark-mode {
     --muted: #a0a0a0;
     --primary: #00d4ff;
     --primary-dark: #00a8cc;
-    --nav-bg: #1a1a1a;
-    --nav-text: #e0e0e0;
-    --nav-hover: #3a3a3a;
     --card-bg: #333333;
     --muted-bg: #404040;
-    --copyright: #666666;
-    --divider: #404040;
 }
 
 html,
@@ -103,19 +93,10 @@ header nav {
     display: flex;
     align-items: center;
     min-width: 0;
-}
-
-.nav-links li {
-    margin: 0;
-}
-
-.nav-link {
-    display: block;
-    color: var(--text);
-    padding: 1rem 1.5rem;
-    transition: all 0.3s ease;
-    position: relative;
-    white-space: nowrap;
+    list-style: none;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .theme-toggle:hover {
@@ -141,14 +122,6 @@ html.dark-mode .theme-toggle:hover {
     display: none;
 }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 0;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 .nav-links li {
     margin: 0;
 }
@@ -159,6 +132,7 @@ html.dark-mode .theme-toggle:hover {
     padding: 1rem 1.5rem;
     transition: all 0.3s ease;
     position: relative;
+    white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -356,7 +330,6 @@ main {
 
 .projectos-grid {
     display: block;
-    gap: 2rem;
     min-width: 0;
 }
 
@@ -395,10 +368,6 @@ main {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-}
-.projectos-carousel-ready .proyecto-card.is-active {
-    display: flex;
-    animation: proyectoFade 0.35s ease;
 }
 
 .proyecto-card:hover {
@@ -505,44 +474,6 @@ main {
     color: var(--muted);
     font-weight: bold;
     text-align: center;
-}
-
-@keyframes proyectoSlideForward {
-    from {
-        transform: translateX(110%) scale(0.98);
-    }
-
-    to {
-        transform: translateX(0) scale(1);
-    }
-}
-
-@keyframes proyectoSlideBackward {
-    from {
-        transform: translateX(-110%) scale(0.98);
-    }
-
-    to {
-        transform: translateX(0) scale(1);
-    }
-}
-
-@keyframes proyectoFade {
-    from {
-        opacity: 0;
-        transform: translateX(16px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .projectos-carousel-ready .proyecto-card.is-active {
-        animation: none;
-    }
 }
 
 /* Other Sections */
@@ -812,9 +743,10 @@ footer {
         left: 0;
         right: 0;
         top: 100%;
+        width: 100%;
         flex-direction: column;
         gap: 0;
-        margin: 0.25rem 0 0 0;
+        margin: 0.5rem 0 0 0;
         background-color: var(--bg);
         border-top: 1px solid var(--muted-bg);
         z-index: 90;
@@ -854,15 +786,6 @@ footer {
         outline-offset: 3px;
     }
 
-    .nav-links {
-        width: 100%;
-        flex-direction: column;
-        gap: 0;
-        margin-top: 0.5rem;
-        background-color: var(--bg);
-        border-top: 1px solid var(--muted-bg);
-    }
-
     .nav-links.is-open {
         transform: scaleY(1);
         opacity: 1;
@@ -880,15 +803,6 @@ footer {
 
     .nav-link:hover {
         transform: none;
-    }
-
-    .sobreMi-content {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .sobreMi-text {
-        order: 1;
     }
 
     .sobreMi-content {
@@ -914,10 +828,6 @@ footer {
         width: 150px;
         height: 150px;
         margin: 0 auto 1rem auto;
-    }
-
-    .projectos-grid {
-        width: 100%;
     }
 
     .footer-content {
@@ -964,10 +874,6 @@ footer {
 
     .copyright {
         width: calc(100% - 2rem);
-    }
-
-    .sobreMi-text h1 {
-        font-size: 1.2rem;
     }
 
     .projectos_section h2,

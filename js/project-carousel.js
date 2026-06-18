@@ -17,7 +17,7 @@ function setActiveHeight() {
 
 function buildTrack() {
     if (!projectGrid) return null;
-    // create a track and move cards inside it
+
     const trackEl = document.createElement('div');
     trackEl.className = 'projectos-track';
     projectCards.forEach(card => trackEl.appendChild(card));
@@ -34,7 +34,6 @@ const showProject = (index) => {
 
     projectCards.forEach((card, i) => {
         const isActive = i === currentProject;
-        card.classList.toggle('is-active', isActive);
         card.setAttribute('aria-hidden', String(!isActive));
     });
     prevButton.disabled = currentProject === 0;
@@ -45,7 +44,6 @@ const showProject = (index) => {
 
 if (projectSection && projectGrid && projectCards.length > 0 && prevButton && nextButton && counter) {
     projectSection.classList.add('projectos-carousel-ready');
-    // build track
     track = buildTrack();
     projectGrid.setAttribute('tabindex', '0');
 
@@ -80,6 +78,5 @@ if (projectSection && projectGrid && projectCards.length > 0 && prevButton && ne
         });
     });
 
-    // ensure correct initial sizing
     showProject(currentProject);
 }

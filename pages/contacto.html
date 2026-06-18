@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css?v=20260617-responsive-2">
+    <link rel="stylesheet" href="../css/styles.css?v=20260618-cleanup">
     <link rel="stylesheet" href="../css/contact-form-styles.css?v=20260617-responsive-2">
     <script src="../js/theme-toggle.js?v=20260617-responsive-2" defer></script>
-    <script src="../js/contact-form.js?v=20260617-responsive-2" defer></script>
+    <script src="../js/contact-form.js?v=20260618-cleanup" defer></script>
     <script src="../js/mobile-menu.js?v=20260617-responsive-2" defer></script>
     <title>Contacto</title>
 </head>
@@ -40,17 +40,17 @@
                 <p>Si deseas ponerte en contacto conmigo, puedes hacerlo a través de los siguientes medios:</p>
                 <div class="contacto-form-container">
                     <form id="contact-form" novalidate>
-                        <div class="form-field" data-field="subject">
+                        <div class="form-field">
                             <label for="subject">Asunto</label>
                             <input type="text" id="subject" name="subject" maxlength="100" placeholder="Escribe el asunto">
-                            <span class="field-error" id="subject-error" aria-live="polite"></span>
+                            <span class="field-error" aria-live="polite"></span>
                         </div>
 
-                        <div class="form-field" data-field="message">
+                        <div class="form-field">
                             <label for="message">Mensaje</label>
                             <textarea id="message" name="message" rows="5" maxlength="500" placeholder="Escribe tu mensaje aquí"></textarea>
                             <span id="message-counter" class="message-counter">0/500</span>
-                            <span class="field-error" id="message-error" aria-live="polite"></span>
+                            <span class="field-error" aria-live="polite"></span>
                         </div>
 
                         <button type="submit" class="contact-form-button">Enviar mensaje</button>

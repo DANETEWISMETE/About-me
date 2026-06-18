@@ -1,5 +1,5 @@
 const CONTACT_EMAIL = 'danielguillamonrico@gmail.com';
-const FORM_SUBMIT_URL = 'https://formsubmit.co/ajax/danielguillamonrico@gmail.com';
+const FORM_SUBMIT_URL = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 const MAX_MESSAGE_LENGTH = 500;
 
 function setMessageCounter(messageField, counter) {
@@ -31,7 +31,7 @@ function clearFieldError(field) {
     if (field) {
         field.classList.remove('field-invalid');
     }
-    const errorElement = field?.parentElement?.querySelector('.field-error');
+    const errorElement = getFieldErrorElement(field);
     if (errorElement) {
         errorElement.textContent = '';
         errorElement.classList.remove('visible');
@@ -90,19 +90,17 @@ function initializeContactForm() {
     });
 
     form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
         const subjectValid = validateSubject(subjectField);
         const messageValid = validateMessage(messageField);
 
         if (!subjectValid || !messageValid) {
-            event.preventDefault();
             return;
         }
-        event.preventDefault();
 
         const subject = subjectField.value.trim();
         const message = messageField.value.trim();
-
-        event.preventDefault();
 
         const formData = new FormData();
         formData.append('subject', subject);
@@ -116,7 +114,10 @@ function initializeContactForm() {
                 showSuccess('Mensaje enviado correctamente. Gracias.');
                 form.reset();
                 setMessageCounter(messageField, counter);
-                const fb = document.querySelector('#mailto-fallback'); if (fb) fb.style.display = 'none';
+                const fallback = document.querySelector('#mailto-fallback');
+                if (fallback) {
+                    fallback.style.display = 'none';
+                }
             } else {
                 const mailtoUrl = formatMailtoUrl(subject, message);
                 showMailtoFallback(mailtoUrl);
@@ -198,26 +199,21 @@ async function submitWithFormSubmit(formData) {
 }
 
 function showSuccess(msg) {
-    const messageBox = getStatusMessageBox();
-    if (messageBox) {
-        messageBox.textContent = msg;
-        messageBox.className = 'status-message visible success';
-        messageBox.style.display = 'block';
-        clearStatusTimeout();
-        statusClearTimer = window.setTimeout(() => hideStatusMessage(), 3000);
-    } else {
-        alert(msg);
-    }
+    showStatusMessage(msg, 'success', 3000);
 }
 
 function showError(msg) {
+    showStatusMessage(msg, 'error', 5000);
+}
+
+function showStatusMessage(msg, type, duration) {
     const messageBox = getStatusMessageBox();
     if (messageBox) {
         messageBox.textContent = msg;
-        messageBox.className = 'status-message visible error';
+        messageBox.className = `status-message visible ${type}`;
         messageBox.style.display = 'block';
         clearStatusTimeout();
-        statusClearTimer = window.setTimeout(() => hideStatusMessage(), 5000);
+        statusClearTimer = window.setTimeout(() => hideStatusMessage(), duration);
     } else {
         alert(msg);
     }
