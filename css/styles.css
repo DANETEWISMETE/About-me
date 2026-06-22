@@ -289,6 +289,7 @@ main > section:nth-child(2) {
 
 /* Experiencia Laboral Section */
 .experiencia_laboral_section {
+    position: relative;
     background-color: var(--surface);
     padding: 2rem;
     border-radius: 10px;
@@ -306,6 +307,7 @@ main > section:nth-child(2) {
     overflow: hidden;
     border-radius: 8px;
     outline: none;
+    padding-right: 2.5rem;
     transition: height 0.25s ease;
 }
 
@@ -349,47 +351,40 @@ main > section:nth-child(2) {
 
 .experiencia-controls {
     display: flex;
+    position: absolute;
+    top: 50%;
+    right: 0.7rem;
+    z-index: 2;
+    transform: translateY(-50%);
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 0.8rem;
 }
 
-.experiencia-button {
-    width: 42px;
-    height: 42px;
+.experiencia-dot {
+    width: 13px;
+    height: 13px;
+    padding: 0;
     border: 0;
     border-radius: 50%;
-    color: #ffffff;
-    background-color: var(--primary);
-    font-size: 1.25rem;
-    font-weight: bold;
-    line-height: 1;
+    background-color: var(--muted);
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.22);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
-}
-
-.experiencia-button:hover:not(:disabled) {
-    background-color: var(--primary-dark);
-    transform: translateY(-2px);
-}
-
-.experiencia-button:disabled {
-    cursor: not-allowed;
     opacity: 0.45;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 }
 
-.experiencia-button:focus-visible {
+.experiencia-dot:hover,
+.experiencia-dot.is-active {
+    background-color: var(--primary);
+    opacity: 1;
+    transform: scale(1.25);
+    box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.14);
+}
+
+.experiencia-dot:focus-visible {
     outline: 3px solid var(--primary-contrast);
     outline-offset: 3px;
-}
-
-.experiencia-counter {
-    min-width: 64px;
-    color: var(--muted);
-    font-weight: bold;
-    text-align: center;
 }
 
 .experiencia-figure {
@@ -966,6 +961,10 @@ footer {
     .formacion_section,
     .tecnologias_section {
         padding: 1.5rem;
+    }
+
+    .experiencia-controls {
+        right: 0.65rem;
     }
 }
 

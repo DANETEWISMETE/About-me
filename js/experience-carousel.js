@@ -1,11 +1,13 @@
 const experienceContainer = document.querySelector('.experiencia-container');
 const experienceItems = Array.from(document.querySelectorAll('.experiencia-item'));
+const AUTOPLAY_DELAY = 4500;
 
 let currentExperience = 0;
 let experienceTrack = null;
 let dragStartY = 0;
 let dragOffsetY = 0;
 let isDraggingExperience = false;
+let autoplayTimer = null;
 
 function buildExperienceTrack() {
     if (!experienceContainer) return null;
@@ -20,28 +22,23 @@ function buildExperienceTrack() {
 function createExperienceControls() {
     const controls = document.createElement('div');
     controls.className = 'experiencia-controls';
-    controls.setAttribute('aria-label', 'Controles de experiencia laboral');
+    controls.setAttribute('aria-label', 'Seleccionar experiencia laboral');
 
-    const prevButton = document.createElement('button');
-    prevButton.className = 'experiencia-button experiencia-prev';
-    prevButton.type = 'button';
-    prevButton.setAttribute('aria-label', 'Experiencia anterior');
-    prevButton.textContent = '↑';
+    const dots = experienceItems.map((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = 'experiencia-dot';
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `Ver experiencia ${index + 1}`);
+        dot.addEventListener('click', () => {
+            showExperience(index, dots);
+            restartAutoplay(dots);
+        });
+        controls.appendChild(dot);
+        return dot;
+    });
 
-    const counter = document.createElement('span');
-    counter.className = 'experiencia-counter';
-    counter.setAttribute('aria-live', 'polite');
-
-    const nextButton = document.createElement('button');
-    nextButton.className = 'experiencia-button experiencia-next';
-    nextButton.type = 'button';
-    nextButton.setAttribute('aria-label', 'Experiencia siguiente');
-    nextButton.textContent = '↓';
-
-    controls.append(prevButton, counter, nextButton);
-    experienceContainer.insertAdjacentElement('afterend', controls);
-
-    return { prevButton, nextButton, counter };
+    experienceContainer.appendChild(controls);
+    return dots;
 }
 
 function getActiveExperienceHeight() {
@@ -64,8 +61,9 @@ function moveExperienceTrack(offset = 0) {
     experienceTrack.style.transform = `translateY(${translateY}px)`;
 }
 
-function showExperience(index, controls) {
-    currentExperience = Math.max(0, Math.min(index, experienceItems.length - 1));
+function showExperience(index, dots) {
+    const total = experienceItems.length;
+    currentExperience = (index + total) % total;
     setExperienceHeight();
     moveExperienceTrack();
 
@@ -73,12 +71,34 @@ function showExperience(index, controls) {
         item.setAttribute('aria-hidden', String(itemIndex !== currentExperience));
     });
 
-    controls.prevButton.disabled = currentExperience === 0;
-    controls.nextButton.disabled = currentExperience === experienceItems.length - 1;
-    controls.counter.textContent = `${currentExperience + 1} / ${experienceItems.length}`;
+    dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === currentExperience;
+        dot.classList.toggle('is-active', isActive);
+        dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+    });
 }
 
-function endExperienceDrag(pointerId, controls) {
+function startAutoplay(dots) {
+    if (experienceItems.length < 2) return;
+
+    autoplayTimer = window.setInterval(() => {
+        showExperience(currentExperience + 1, dots);
+    }, AUTOPLAY_DELAY);
+}
+
+function stopAutoplay() {
+    if (!autoplayTimer) return;
+
+    window.clearInterval(autoplayTimer);
+    autoplayTimer = null;
+}
+
+function restartAutoplay(dots) {
+    stopAutoplay();
+    startAutoplay(dots);
+}
+
+function endExperienceDrag(pointerId, dots) {
     if (!isDraggingExperience) return;
 
     const dragThreshold = Math.min(80, getActiveExperienceHeight() * 0.25);
@@ -90,16 +110,14 @@ function endExperienceDrag(pointerId, controls) {
     }
 
     if (dragOffsetY < -dragThreshold) {
-        showExperience(currentExperience + 1, controls);
-        return;
+        showExperience(currentExperience + 1, dots);
+    } else if (dragOffsetY > dragThreshold) {
+        showExperience(currentExperience - 1, dots);
+    } else {
+        moveExperienceTrack();
     }
 
-    if (dragOffsetY > dragThreshold) {
-        showExperience(currentExperience - 1, controls);
-        return;
-    }
-
-    moveExperienceTrack();
+    restartAutoplay(dots);
 }
 
 if (experienceContainer && experienceItems.length > 0) {
@@ -107,12 +125,12 @@ if (experienceContainer && experienceItems.length > 0) {
     experienceContainer.setAttribute('tabindex', '0');
 
     experienceTrack = buildExperienceTrack();
-    const controls = createExperienceControls();
-
-    controls.prevButton.addEventListener('click', () => showExperience(currentExperience - 1, controls));
-    controls.nextButton.addEventListener('click', () => showExperience(currentExperience + 1, controls));
+    const dots = createExperienceControls();
 
     experienceContainer.addEventListener('pointerdown', (event) => {
+        if (event.target.closest('.experiencia-controls')) return;
+
+        stopAutoplay();
         isDraggingExperience = true;
         dragStartY = event.clientY;
         dragOffsetY = 0;
@@ -128,22 +146,24 @@ if (experienceContainer && experienceItems.length > 0) {
     });
 
     experienceContainer.addEventListener('pointerup', (event) => {
-        endExperienceDrag(event.pointerId, controls);
+        endExperienceDrag(event.pointerId, dots);
     });
 
     experienceContainer.addEventListener('pointercancel', (event) => {
-        endExperienceDrag(event.pointerId, controls);
+        endExperienceDrag(event.pointerId, dots);
     });
 
     experienceContainer.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowUp') {
             event.preventDefault();
-            showExperience(currentExperience - 1, controls);
+            showExperience(currentExperience - 1, dots);
+            restartAutoplay(dots);
         }
 
         if (event.key === 'ArrowDown') {
             event.preventDefault();
-            showExperience(currentExperience + 1, controls);
+            showExperience(currentExperience + 1, dots);
+            restartAutoplay(dots);
         }
     });
 
@@ -155,9 +175,10 @@ if (experienceContainer && experienceItems.length > 0) {
     experienceItems.forEach((item) => {
         item.querySelectorAll('img').forEach((image) => {
             if (image.complete) return;
-            image.addEventListener('load', () => showExperience(currentExperience, controls), { once: true });
+            image.addEventListener('load', () => showExperience(currentExperience, dots), { once: true });
         });
     });
 
-    showExperience(currentExperience, controls);
+    showExperience(currentExperience, dots);
+    startAutoplay(dots);
 }
